@@ -5,11 +5,13 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:model="clr-namespace:WpfApp6.Model"
                       xmlns:views="clr-namespace:WpfApp6.View"
                       x:Name="core"
                       Title="HelpdeskA"
                       Width="949"
                       Height="772"
+                      d:DataContext="{d:DesignInstance model:ViewModel}"
                       WindowStartupLocation="CenterScreen"
                       WindowState="Maximized"
                       mc:Ignorable="d">
@@ -117,8 +119,6 @@
                                 IsPaneOpen="False"
                                 ItemInvoked="HamburgerMenuControl_OnItemInvoked"
                                 ItemTemplate="{StaticResource MenuItemTemplateIC}"
-                                SelectedIndex="0"
-                                Content="{Binding RelativeSource={RelativeSource Mode=Self}, Path=SelectedItem}"
                                 Style="{StaticResource HamburgerMenuCreatorsStyle}"
                                 VerticalScrollBarOnLeftSide="False">
 
@@ -142,19 +142,19 @@
                             <iconPacks:PackIconMaterial Kind="Numeric1Box" />
                         </Controls:HamburgerMenuIconItem.Icon>
                         <Controls:HamburgerMenuIconItem.Tag>
-                            <views:FirstView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Controls:MetroWindow}, Path=DataContext}" />
+                            <views:FirstView />
                         </Controls:HamburgerMenuIconItem.Tag>
 
                     </Controls:HamburgerMenuIconItem>
 
 
-                    
+
                     <Controls:HamburgerMenuIconItem Label="Second menu item">
                         <Controls:HamburgerMenuIconItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Numeric2Box" />
                         </Controls:HamburgerMenuIconItem.Icon>
                         <Controls:HamburgerMenuIconItem.Tag>
-                            <views:SecondView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Controls:MetroWindow}, Path=DataContext}" />
+                            <views:SecondView />
                         </Controls:HamburgerMenuIconItem.Tag>
 
                     </Controls:HamburgerMenuIconItem>
@@ -164,47 +164,43 @@
                             <iconPacks:PackIconMaterial Kind="Numeric3Box" />
                         </Controls:HamburgerMenuIconItem.Icon>
                         <Controls:HamburgerMenuIconItem.Tag>
-                            <views:ThirdView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Controls:MetroWindow}, Path=DataContext}" />
+                            <views:ThirdView />
                         </Controls:HamburgerMenuIconItem.Tag>
 
                     </Controls:HamburgerMenuIconItem>
 
-                    
+
 
                 </Controls:HamburgerMenuItemCollection>
             </Controls:HamburgerMenu.ItemsSource>
 
 
             <!--  Content  -->
-            <Controls:HamburgerMenu.ContentTemplate>
-                <DataTemplate>
-                    <Grid x:Name="ContentGrid">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="48" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+            <Controls:HamburgerMenu.Content>
+                <Grid x:Name="ContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <Controls:TransitioningContentControl Grid.Row="0"
-                                                              Margin="20,5,-1,0"
-                                                              Background="{DynamicResource MahApps.Brushes.WhiteColor}"
-                                                              Content="{Binding Label}"
-                                                              FontSize="24"
-                                                              Foreground="{DynamicResource MahApps.Brushes.Accent}"
-                                                              Transition="RightReplace" />
-
-
-                        <Controls:TransitioningContentControl Grid.Row="1"
-                                                              Margin="20,10,0,0"
-                                                              Content="{Binding Tag}"
-                                                              RestartTransitionOnContentChange="True"
-                                                              Transition="Down" />
+                    <Controls:TransitioningContentControl Grid.Row="0"
+                                                          Margin="20,5,-1,0"
+                                                          Background="{DynamicResource MahApps.Brushes.WhiteColor}"
+                                                          Content="{Binding ElementName=HamburgerMenuControl, Path=SelectedItem.Label}"
+                                                          FontSize="24"
+                                                          Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                                                          Transition="RightReplace" />
 
 
-                    </Grid>
+                    <Controls:TransitioningContentControl Grid.Row="1"
+                                                          Margin="20,10,0,0"
+                                                          Content="{Binding ElementName=HamburgerMenuControl, Path=SelectedItem.Tag}"
+                                                          RestartTransitionOnContentChange="True"
+                                                          Transition="Down" />
 
-                </DataTemplate>
 
-            </Controls:HamburgerMenu.ContentTemplate>
+                </Grid>
+            </Controls:HamburgerMenu.Content>
 
 
         </Controls:HamburgerMenu>

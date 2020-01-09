@@ -17,38 +17,10 @@ using System.Data.SQLite;
 using WpfApp6.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using WpfApp6.Model;
 
 namespace WpfApp6
 {
-    /// <summary>
-    /// Interakční logika pro MainWindow.xaml
-    /// </summary>
-    /// 
-    public class ViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        private string someText;
-        public string SomeText
-        {
-            get { return someText; }
-            set
-            {
-                someText = value;
-                OnPropertyChanged("SomeText");
-            }
-        }
-    }
-
 
     public partial class Core : MetroWindow
     {
@@ -61,14 +33,11 @@ namespace WpfApp6
         int pouzitepozadi = 1;
         SQLiteConnection m_dbConnection;
 
-public Core()
-{
-    this.DataContext = new ViewModel();
-    InitializeComponent();
-}
-
-
-        
+        public Core()
+        {
+            this.DataContext = new ViewModel();
+            InitializeComponent();
+        }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
         {
