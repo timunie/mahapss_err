@@ -32,7 +32,7 @@ namespace WpfApp6.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            VM.SomeText = "First view text";
+            VM.SomeText = "Second view text";
         }
     }
 }

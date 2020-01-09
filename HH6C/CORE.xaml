@@ -109,6 +109,10 @@
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Themes/HamburgerMenuTemplate.xaml" />
         </Grid.Resources>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
 
 
@@ -204,7 +208,12 @@
 
 
         </Controls:HamburgerMenu>
+        <TextBlock Grid.Row="1"
+                   FontSize="20"
+                   Foreground="Red"
+                   Text="{Binding FancyMessage}" />
     </Grid>
+
 
 
 </Controls:MetroWindow>

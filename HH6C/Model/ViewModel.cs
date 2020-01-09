@@ -32,7 +32,10 @@ namespace WpfApp6.Model
             {
                 someText = value;
                 OnPropertyChanged("SomeText");
+                OnPropertyChanged(nameof(FancyMessage));
             }
         }
+
+        public string FancyMessage => $"This one is cool: {SomeText}";
     }
 }
